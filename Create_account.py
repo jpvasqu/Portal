@@ -1,7 +1,7 @@
 from tkinter import *
 import mysql.connector
 from tkinter import messagebox
-import os
+
 
 class create:
 
