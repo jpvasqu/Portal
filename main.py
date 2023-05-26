@@ -1,7 +1,6 @@
 import smtplib
 from tkinter import *
 from tkinter import messagebox
-from PIL import Image, ImageTk
 import webbrowser
 import mysql.connector
 
@@ -488,6 +487,7 @@ class main:
         
         
         self.main.mainloop()
+        
     def log_out(self):
         self.main.destroy()
         import Log_in
@@ -672,7 +672,7 @@ class main:
                         "\n\n\nTotal Charge: "+str(self.total)+"\nAmount Paid: "+paid+"\nChange: "+str(self.t))
 
                 # sending the mail
-                s.sendmail("vasquezjohnpaul709@gmail.com",result[0], message)
+                s.sendmail(result[0],result[0], message)
 
                 # terminating the session
                 s.quit()
@@ -726,6 +726,3 @@ class main:
         self.frm_fhe.pack()
 
 main()
-        
-
-
