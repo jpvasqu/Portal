@@ -70,15 +70,15 @@ class main:
         
         self.lbl_course.place(x=350,y=50)
 
-        self.lbl_unit=Label(master=self.frm_student_details,text="No. of Units:",
+        self.lbl_unit=Label(master=self.frm_student_details,text="No. Student Gcash :",
                             background="#5cd6c6",font=("Courier New Baltic",15))
         
-        self.lbl_unit.place(x=630,y=8)
+        self.lbl_unit.place(x=600,y=8)
 
-        self.lbl_rate=Label(master=self.frm_student_details,text="Rate Per Units:",
+        self.lbl_rate=Label(master=self.frm_student_details,text="No. School Gash :",
                             background="#5cd6c6",font=("Courier New Baltic",15))
         
-        self.lbl_rate.place(x=630,y=50)
+        self.lbl_rate.place(x=600,y=50)
 
         #LABEL FOR FHE
         
@@ -174,14 +174,25 @@ class main:
 
 
 
+        mycursor=self.data.cursor()
 
+        sql="select student_name from student "
+
+        mycursor.execute(sql,)
+        self.result=mycursor.fetchall()
 
 
 
         #ENTRYS
 
         #ENTRYS FOR STUDENT DETAILS
-        self.ent_student_name=Entry(master=self.frm_student_details,width=20,font=("arial",20))
+        options = self.result
+
+        self.clicked_name = StringVar()
+        self.clicked_name.set(self.result[0])
+
+        self.ent_student_name=OptionMenu(self.frm_student_details , self.clicked_name , *options )
+        self.ent_student_name.config(border=1,width=40,font=("arial",10))
         self.ent_student_name.place(x=10,y=40)
         
         #DROP BOX
@@ -232,7 +243,7 @@ class main:
         ]
         
         self.paid_lab = IntVar()
-        self.paid_lab.set(0)
+        self.paid_lab.set(200)
 
         self.ent_laboratory_fee=OptionMenu(self.frm_fhe, self.paid_lab, *paid_lab )
         self.ent_laboratory_fee.config(border=1,width=10,font=("arial",10))
@@ -248,7 +259,7 @@ class main:
         ]
 
         self.paid_lib = IntVar()
-        self.paid_lib.set(0)
+        self.paid_lib.set(100)
         self.ent_library_fee=OptionMenu(self.frm_fhe, self.paid_lib, *paid_lib )
         self.ent_library_fee.config(border=1,width=10,font=("arial",10))
         self.ent_library_fee.place(x=335,y=150)
@@ -262,7 +273,7 @@ class main:
         ]
 
         self.paid_rig = IntVar()
-        self.paid_rig.set(0)
+        self.paid_rig.set(400)
 
         self.ent_rigistration_fee=OptionMenu(self.frm_fhe, self.paid_rig, *paid_rig )
         self.ent_rigistration_fee.config(border=1,width=10,font=("arial",10))
@@ -277,7 +288,7 @@ class main:
         ]
 
         self.paid_tui = IntVar()
-        self.paid_tui.set(0)
+        self.paid_tui.set(300)
 
         self.ent_tuition_fee=OptionMenu(self.frm_fhe, self.paid_tui, *paid_tui )
         self.ent_tuition_fee.config(border=1,width=10,font=("arial",10))
@@ -292,7 +303,7 @@ class main:
         ]
 
         self.paid_ath = IntVar()
-        self.paid_ath.set(0)
+        self.paid_ath.set(100)
 
         self.ent_athletic_fee=OptionMenu(self.frm_fhe, self.paid_ath, *paid_ath )
         self.ent_athletic_fee.config(border=1,width=10,font=("arial",10))
@@ -307,7 +318,7 @@ class main:
         ]
 
         self.paid_com = IntVar()
-        self.paid_com.set(0)
+        self.paid_com.set(200)
 
         self.ent_computer_fee=OptionMenu(self.frm_fhe, self.paid_com, *paid_com )
         self.ent_computer_fee.config(border=1,width=10,font=("arial",10))
@@ -322,7 +333,7 @@ class main:
         ]
 
         self.paid_scu = IntVar()
-        self.paid_scu.set(0)
+        self.paid_scu.set(400)
 
         self.ent_scuaa_fee=OptionMenu(self.frm_fhe, self.paid_scu, *paid_scu )
         self.ent_scuaa_fee.config(border=1,width=10,font=("arial",10))
@@ -337,7 +348,7 @@ class main:
         ]
 
         self.paid_dev = IntVar()
-        self.paid_dev.set(0)
+        self.paid_dev.set(100)
 
         self.ent_development_fee=OptionMenu(self.frm_fhe, self.paid_dev, *paid_dev )
         self.ent_development_fee.config(border=1,width=10,font=("arial",10))
@@ -352,7 +363,7 @@ class main:
         ]
 
         self.paid_int = IntVar()
-        self.paid_int.set(0)
+        self.paid_int.set(100)
 
 
         self.ent_internet_fee=OptionMenu(self.frm_fhe, self.paid_int, *paid_int )
@@ -368,7 +379,7 @@ class main:
         ]
 
         self.paid_den = IntVar()
-        self.paid_den.set(0)
+        self.paid_den.set(200)
 
         self.ent_dental_fee=OptionMenu(self.frm_fhe, self.paid_den, *paid_den )
         self.ent_dental_fee.config(border=1,width=10,font=("arial",10))
@@ -383,7 +394,7 @@ class main:
         ]
 
         self.paid_sch = IntVar()
-        self.paid_sch.set(0)
+        self.paid_sch.set(300)
 
         self.ent_school_organ_fee=OptionMenu(self.frm_fhe, self.paid_sch, *paid_sch)
         self.ent_school_organ_fee.config(border=1,width=10,font=("arial",10))
@@ -398,7 +409,7 @@ class main:
         ]
 
         self.paid_act = IntVar()
-        self.paid_act.set(0)
+        self.paid_act.set(300)
 
         self.ent_activity_fee=OptionMenu(self.frm_fhe, self.paid_act, *paid_act )
         self.ent_activity_fee.config(border=1,width=10,font=("arial",10))
@@ -413,7 +424,7 @@ class main:
         ]
 
         self.paid_nstp = IntVar()
-        self.paid_nstp.set(0)
+        self.paid_nstp.set(200)
 
 
         self.ent_nstp_fee=OptionMenu(self.frm_fhe, self.paid_nstp, *paid_nstp )
@@ -429,7 +440,7 @@ class main:
         ]
 
         self.paid_cou = IntVar()
-        self.paid_cou.set(0)
+        self.paid_cou.set(100)
 
 
         self.ent_council_fee=OptionMenu(self.frm_fhe, self.paid_cou, *paid_cou )
@@ -445,7 +456,7 @@ class main:
         ]
 
         self.paid_gui = IntVar()
-        self.paid_gui.set(0)
+        self.paid_gui.set(500)
 
 
         self.ent_guidance_fee=OptionMenu(self.frm_fhe, self.paid_gui, *paid_gui )
@@ -461,7 +472,7 @@ class main:
         ]
 
         self.paid_med = IntVar()
-        self.paid_med.set(0)
+        self.paid_med.set(100)
 
 
         self.ent_medical_fee=OptionMenu(self.frm_fhe, self.paid_med, *paid_med)
@@ -495,7 +506,7 @@ class main:
 
 
     def clear(self):
-        self.ent_student_name.delete(0,END)
+        self.clicked_name.set(self.result[0])
         self.clicked_course.set("BSIT")
         self.clicked_year.set("1st Year")
         self.ent_unit.delete(0,END)
@@ -520,7 +531,11 @@ class main:
 
 
     def page2(self):
-        name=self.ent_student_name.get()
+        text=self.clicked_name.get()
+        x=text.replace("(","")
+        y=x.replace("'","")
+        z=y.replace(",","")
+        name=z.replace(")","")
         sql="select * from student where student_name=%s or student_name=%s"
         var=(name,name)
         self.mycursor.execute(sql,var)
@@ -588,7 +603,7 @@ class main:
                 self.btn_main.place(x=90,y=300)
 
                 #BUTTON PAYMENT
-                self.btn_enter=Button(master=self.frm_payment,text="Enter",background="#476662",font=("arial bold",15)
+                self.btn_enter=Button(master=self.frm_payment,text="Compute",background="#476662",font=("arial bold",15)
                                 ,width=10,foreground="#dfe8a2",command=self.compute)
                 self.btn_enter.place(x=90,y=250)
 
@@ -611,14 +626,18 @@ class main:
 
     def gcash(self):
         
-        name=self.ent_student_name.get()
+        text=self.clicked_name.get()
+        x=text.replace("(","")
+        y=x.replace("'","")
+        z=y.replace(",","")
+        name=z.replace(")","")
         sql="select * from student where student_name=%s or student_name=%s"
         var=(name,name)
         self.mycursor.execute(sql,var)
         result=self.mycursor.fetchone()
 
         if result != None:
-                webbrowser.open("https://www.gcash.com/")
+                #webbrowser.open("https://www.gcash.com/")
 
                 s = smtplib.SMTP('smtp.gmail.com', 587)
 
@@ -637,7 +656,11 @@ class main:
                 s.login("maxp16666@gmail.com", "ycrizekkdjhutyok")
 
                 # message to be sent
-                name=self.ent_student_name.get()
+                text=self.clicked_name.get()
+                x=text.replace("(","")
+                y=x.replace("'","")
+                z=y.replace(",","")
+                name=z.replace(")","")
                 coure=self.clicked_course.get()
                 year=self.clicked_year.get()
                 unit=self.ent_unit.get()
@@ -664,7 +687,7 @@ class main:
 
                 title = "FHE RECEIPT"
 
-                message = (title+"\nStudent name: "+name+"\nCoure: "+coure+"\nYear :"+year+"\nUnit: "+unit+"\nRate: "+rate+
+                message = (title+"\nStudent name: "+name+"\nCoure: "+coure+"\nYear :"+year+"\nStudent Gcash: "+unit+"\nSchool Gcash: "+rate+
                         "\n\nLaboratory Fee: "+lab+"\nLibrary Fee: "+lib+"\nRigistration Fee: "+rig+"\nTuition Fee: "
                         +tui+"\nAthletic Fee: "+ath+"\nComputer Fee: "+com+"\nSCUAA Fee: "+scu+"\nDevelopment Fee: "+dev
                         +"\n Internet Fee: "+inte+"\nDental Fee: "+den+"\nSchool Organ Fee: "+sch+"\nSchool Activity Fee: "+act
@@ -688,26 +711,26 @@ class main:
                 self.space.pack()
                 self.frm_fhe.pack()
                 #Clear
-                self.ent_student_name.delete(0,END)
+                self.clicked_name.set(self.result[0])
                 self.clicked_course.set("BSIT")
                 self.clicked_year.set("1st Year")
                 self.ent_unit.delete(0,END)
                 self.ent_rate.delete(0,END)
-                self.paid_lab.set(0)
-                self.paid_lib.set(0)
-                self.paid_rig.set(0)
-                self.paid_tui.set(0)
-                self.paid_ath.set(0)
-                self.paid_com.set(0)
-                self.paid_dev.set(0)
-                self.paid_int.set(0)
-                self.paid_den.set(0)
-                self.paid_sch.set(0)
-                self.paid_act.set(0)
-                self.paid_nstp.set(0)
-                self.paid_cou.set(0)
-                self.paid_gui.set(0)
-                self.paid_med.set(0)
+                self.paid_lab.set(300)
+                self.paid_lib.set(100)
+                self.paid_rig.set(200)
+                self.paid_tui.set(300)
+                self.paid_ath.set(300)
+                self.paid_com.set(200)
+                self.paid_dev.set(100)
+                self.paid_int.set(100)
+                self.paid_den.set(300)
+                self.paid_sch.set(400)
+                self.paid_act.set(500)
+                self.paid_nstp.set(100)
+                self.paid_cou.set(200)
+                self.paid_gui.set(100)
+                self.paid_med.set(100)
         else:
             messagebox.showerror(message="Invalid Student Name")
         
