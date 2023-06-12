@@ -568,7 +568,7 @@ class main:
                 self.space.pack_forget()
 
                 #FRAME
-                self.frm_payment=Frame(master=self.main,background="#dedbd5",width=320,height=400)
+                self.frm_payment=Frame(master=self.main,background="#dedbd5",width=350,height=560)
                 self.frm_payment.place(x=470,y=150)
 
                 
@@ -590,37 +590,57 @@ class main:
                 self.lbl_amount_paid=Label(self.frm_payment,text="Amount Paid:",font=("arial",15),background="#dedbd5")
                 self.lbl_amount_paid.place(x=20,y=100)
 
+                self.lbl_no_unit=Label(self.frm_payment,text="No.Unit:",font=("arial",15),background="#dedbd5")
+                self.lbl_no_unit.place(x=20,y=150)
                 
+                self.lbl_price_unit=Label(self.frm_payment,text="Price Of Unit:",font=("arial",15),background="#dedbd5")
+                self.lbl_price_unit.place(x=20,y=200)
 
 
                 #ENTRY
                 self.ent_amount_paid=Entry(master=self.frm_payment,width=10,font=("arial",15))
                 self.ent_amount_paid.place(x=155,y=100)
 
+                self.ent_no_unit=Entry(master=self.frm_payment,width=10,font=("arial",15))
+                self.ent_no_unit.place(x=155,y=150)
+
+                self.ent_price_unit=Entry(master=self.frm_payment,width=10,font=("arial",15))
+                self.ent_price_unit.place(x=155,y=200)
+
                 #BUTTON
                 self.btn_main=Button(master=self.frm_payment,text="Back",background="#476662",font=("arial bold",15)
                                 ,width=10,foreground="#dfe8a2",command=self.home)
-                self.btn_main.place(x=90,y=300)
+                self.btn_main.place(x=110,y=400)
 
                 #BUTTON PAYMENT
                 self.btn_enter=Button(master=self.frm_payment,text="Compute",background="#476662",font=("arial bold",15)
                                 ,width=10,foreground="#dfe8a2",command=self.compute)
-                self.btn_enter.place(x=90,y=250)
+                self.btn_enter.place(x=110,y=350)
 
     def compute(self):
         amount=self.ent_amount_paid.get()
         total=self.total
         self.t= int(amount)-int(total)
+        self.num=self.ent_no_unit.get()
+        self.price=self.ent_price_unit.get()
+        
+        self.unit= int(self.num) * int(self.price)
 
         self.lbl_change=Label(self.frm_payment,text="Change:",font=("arial",15),background="#dedbd5")
-        self.lbl_change.place(x=20,y=150)
+        self.lbl_change.place(x=20,y=240)
 
         self.lbl_change_total=Label(self.frm_payment,text= self.t ,font=("arial",15),background="#dedbd5")
-        self.lbl_change_total.place(x=170,y=150)
+        self.lbl_change_total.place(x=170,y = 240)
+
+        self.lbl_unit_com=Label(self.frm_payment,text="Unit:",font=("arial",15),background="#dedbd5")
+        self.lbl_unit_com.place(x=20,y=280)
+
+        self.lbl_unit_com_total=Label(self.frm_payment,text= self.unit ,font=("arial",15),background="#dedbd5")
+        self.lbl_unit_com_total.place(x=170,y = 280)
 
         self.btn_enter=Button(master=self.frm_payment,text="Gcash",background="#476662",font=("arial bold",15)
                              ,width=10,foreground="#dfe8a2",command=self.gcash)
-        self.btn_enter.place(x=90,y=350)
+        self.btn_enter.place(x=110,y=450)
 
 
 
@@ -637,7 +657,7 @@ class main:
         result=self.mycursor.fetchone()
 
         if result != None:
-                #webbrowser.open("https://www.gcash.com/")
+                webbrowser.open("https://www.gcash.com/")
 
                 s = smtplib.SMTP('smtp.gmail.com', 587)
 
@@ -682,13 +702,13 @@ class main:
                 coun=str(self.paid_cou.get())
                 gui=str(self.paid_gui.get())
                 med=str(self.paid_med.get())
-
+                unit=str(self.unit)
                 paid = self.ent_amount_paid.get()
 
                 title = "FHE RECEIPT"
 
                 message = (title+"\nStudent name: "+name+"\nCoure: "+coure+"\nYear :"+year+"\nStudent Gcash: "+unit+"\nSchool Gcash: "+rate+
-                        "\n\nLaboratory Fee: "+lab+"\nLibrary Fee: "+lib+"\nRigistration Fee: "+rig+"\nTuition Fee: "
+                        "\nNo. Of Unit: "+self.num+"\nPrice of Unit: "+self.price+"\nTotal Of unit: "+unit+"\n\nLaboratory Fee: "+lab+"\nLibrary Fee: "+lib+"\nRigistration Fee: "+rig+"\nTuition Fee: "
                         +tui+"\nAthletic Fee: "+ath+"\nComputer Fee: "+com+"\nSCUAA Fee: "+scu+"\nDevelopment Fee: "+dev
                         +"\n Internet Fee: "+inte+"\nDental Fee: "+den+"\nSchool Organ Fee: "+sch+"\nSchool Activity Fee: "+act
                         +"\nNSTP Fee: "+nstp+"\nStudent Council Fee: "+coun+"\nGuidance Fee: "+gui+"\nMedical Fee: "+med+
@@ -749,3 +769,6 @@ class main:
         self.frm_fhe.pack()
 
 main()
+        
+
+
