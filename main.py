@@ -1,3 +1,7 @@
+
+        
+
+
 import smtplib
 from tkinter import *
 from tkinter import messagebox
@@ -618,12 +622,15 @@ class main:
                 self.btn_enter.place(x=110,y=350)
 
     def compute(self):
+#na.a ra ari ang pag cumpute
         amount=self.ent_amount_paid.get()
         total=self.total
+        self.price=self.ent_price_unit.get()
+#na.a ra ari ang pag cumpute
         self.t= int(amount)-int(total)
         self.num=self.ent_no_unit.get()
-        self.price=self.ent_price_unit.get()
-        
+#na.a ra ari ang pag cumpute
+#na.a ra ari ang pag cumpute
         self.unit= int(self.num) * int(self.price)
 
         self.lbl_change=Label(self.frm_payment,text="Change:",font=("arial",15),background="#dedbd5")
@@ -676,6 +683,8 @@ class main:
                 s.login("maxp16666@gmail.com", "ycrizekkdjhutyok")
 
                 # message to be sent
+                total=int(self.total)+ int(self.num) * int(self.price)
+
                 text=self.clicked_name.get()
                 x=text.replace("(","")
                 y=x.replace("'","")
@@ -702,17 +711,17 @@ class main:
                 coun=str(self.paid_cou.get())
                 gui=str(self.paid_gui.get())
                 med=str(self.paid_med.get())
-                unit=str(self.unit)
+                unit1=str(self.unit)
                 paid = self.ent_amount_paid.get()
 
                 title = "FHE RECEIPT"
 
                 message = (title+"\nStudent name: "+name+"\nCoure: "+coure+"\nYear :"+year+"\nStudent Gcash: "+unit+"\nSchool Gcash: "+rate+
-                        "\nNo. Of Unit: "+self.num+"\nPrice of Unit: "+self.price+"\nTotal Of unit: "+unit+"\n\nLaboratory Fee: "+lab+"\nLibrary Fee: "+lib+"\nRigistration Fee: "+rig+"\nTuition Fee: "
+                        "\nNo. Of Unit: "+self.num+"\nPrice of Unit: "+self.price+"\nTotal Of unit: "+unit1+"\n\nLaboratory Fee: "+lab+"\nLibrary Fee: "+lib+"\nRigistration Fee: "+rig+"\nTuition Fee: "
                         +tui+"\nAthletic Fee: "+ath+"\nComputer Fee: "+com+"\nSCUAA Fee: "+scu+"\nDevelopment Fee: "+dev
                         +"\n Internet Fee: "+inte+"\nDental Fee: "+den+"\nSchool Organ Fee: "+sch+"\nSchool Activity Fee: "+act
                         +"\nNSTP Fee: "+nstp+"\nStudent Council Fee: "+coun+"\nGuidance Fee: "+gui+"\nMedical Fee: "+med+
-                        "\n\n\nTotal Charge: "+str(self.total)+"\nAmount Paid: "+paid+"\nChange: "+str(self.t))
+                        "\n\n\nTotal Charge: "+str(total)+"\nAmount Paid: "+paid+"\nChange: "+str(self.t))
 
                 # sending the mail
                 s.sendmail(result[0],result[0], message)
@@ -770,5 +779,3 @@ class main:
 
 main()
         
-
-
